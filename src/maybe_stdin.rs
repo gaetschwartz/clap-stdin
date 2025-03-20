@@ -46,7 +46,7 @@ where
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let source = Source::from_str(s)?;
-        let is_stdin = matches!(source, Source::Stdin);
+        let is_stdin = matches!(source, Source::Stdin(_));
         T::from_str(source.get_value()?.trim())
             .map_err(|e| StdinError::FromStr(format!("{e}")))
             .map(|val| Self {

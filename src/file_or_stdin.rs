@@ -44,7 +44,7 @@ pub struct FileOrStdin<T = String> {
 impl<T> FileOrStdin<T> {
     /// Was this value read from stdin
     pub fn is_stdin(&self) -> bool {
-        matches!(self.source, Source::Stdin)
+        matches!(self.source, Source::Stdin(_))
     }
 
     /// Was this value read from a file (path passed in from argument values)
@@ -55,7 +55,7 @@ impl<T> FileOrStdin<T> {
     /// The value passed to this arg (Either "-" for stdin or a filepath)
     pub fn filename(&self) -> &str {
         match &self.source {
-            Source::Stdin => "-",
+            Source::Stdin(_) => "-",
             Source::Arg(path) => path,
         }
     }
